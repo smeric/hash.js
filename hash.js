@@ -48,6 +48,11 @@ var hash = (function() {
         },
         clear: function() {
             toHash({});
+        },
+        onchange: function(func){
+            if (typeof(func)=='function'){
+                window.onhashchange = func;
+            }
         }
     };
 })();
