@@ -28,11 +28,13 @@ Add parameter to hash
         hash.add({ foo: "bar" });               // http://url.com#foo=bar
         hash.add({ car: "dar", sar: "par" });   // http://url.com#foo=bar&car=dar&sar=par
 
-* **hash.get(param)** or **hash.get()**  
+* **hash.get(param)** or **hash.get(param, url)** or **hash.get()** or **hash.get(undefined, url)**  
 Returns value of paramter in hash. If `param` is `undefined` then all values are returned.
 
-        var fooValue = hash.get('foo');         // fooValue == "bar"
-        var allValues = hash.get();             // allValues == { foo: "bar", car: "dar", sar: "par"}
+        var fooValue = hash.get('foo'); // fooValue == "bar"
+        var fooValue = hash.get('foo','http://domain.tld/#foo=bar'); // fooValue == "bar"
+        var allValues = hash.get(); // allValues == { foo: "bar", car: "dar", sar: "par"}
+        var allValues = hash.get(undefined,'http://domain.tld/#foo=bar&car=dar'); // allValues == { foo: "bar", car: "dar"}
 
 * **hash.remove(param)**  
 Removes the value with name `param`.
@@ -43,6 +45,11 @@ Removes the value with name `param`.
 Clears entire hash.
 
         hash.clear();                           // http://url.com#
+
+* **hash.onchange(function(){})**  
+Callback on hash change.
+
+        hash.onchange(function(){alert('hash changed !');});
 
 
 ## License
